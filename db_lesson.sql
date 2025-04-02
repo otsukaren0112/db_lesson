@@ -1,10 +1,12 @@
 -- Q1
 CREATE TABLE departments(
-  department_id int unsigned,
-  name varchar(20),
-  created_at timestamp,
-  updated_at timestamp
+  department_id int unsigned NOT NULL auto_increment PRIMARY KEY,
+  name VARCHAR(20) NOT NULL,
+  created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+
 
 -- Q2
 ALTER TABLE people add department_id int unsigned AFTER email;
@@ -81,20 +83,20 @@ UPDATE people SET department_id = 5 WHERE name = '渚かおる';
 
 SELECT name, age
 FROM people
-WHERE gender = '1'
+WHERE gender = 1
 ORDER BY age DESC;
 
 
 -- Q6
 
 -- SELECT
---  `name`, `email`, `age`
+--  name, email, age
 --FROM
---  `people`
+--  people
 --WHERE
---  `department_id` = 1
+--  department_id = 1
 --ORDER BY
---  `created_at`;
+--  created_at;
 
 peopleテーブルから、name,emile,ageカラムを選択して、
 department_idから1のレコードだけが表示される様に指定して
@@ -105,8 +107,8 @@ created_atカラム（作成日時）で並べている。
 
 SELECT name
 FROM people
-WHERE (gender = '1' AND age BETWEEN 40 AND 49)
-OR (gender = '2' AND age BETWEEN 20 AND 29);
+WHERE (gender = 1 AND age BETWEEN 40 AND 49)
+OR (gender = 2 AND age BETWEEN 20 AND 29);
 
 
 -- Q8
