@@ -1,15 +1,15 @@
 -- Q1
 CREATE TABLE departments(
-  department_id int unsigned NOT NULL auto_increment PRIMARY KEY,
-  name VARCHAR(20) NOT NULL,
-  created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `department_id` int unsigned NOT NULL auto_increment PRIMARY KEY,
+  `name` VARCHAR(20) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 
 
 -- Q2
-ALTER TABLE people add department_id int unsigned AFTER email;
+ALTER TABLE `people` add `department_id` int unsigned AFTER `email`;
 
 -- Q3
 -- departments
@@ -21,8 +21,8 @@ ALTER TABLE people add department_id int unsigned AFTER email;
 -- (カラム1の値, カラム2の値, ...カラムnの値);
 
 
-INSERT INTO departments
-(name)
+INSERT INTO `departments`
+(`name`)
 VALUES
 ('営業'),
 ('開発'),
@@ -32,8 +32,8 @@ VALUES
 
 
 -- people
-INSERT INTO people
-(name, email, age, gender)
+INSERT INTO `people`
+(`name`, `email`, `age`, `gender`)
 VALUES
 ('碇しんじ', 'ikari@gizumo.jp', 20, 1),
 ('綾波れい', 'ayanami@gizumo.jp', 21, 2),
@@ -49,8 +49,8 @@ VALUES
 
 
 -- reports
-INSERT INTO reports
-(content, person_id) VALUES
+INSERT INTO `reports`
+(`content`, `person_id`) VALUES
 ('エヴァの特訓をしてシンクロ率100%を維持', 1),
 ('本を沢山読んで碇くんとご飯を食べたの', 2),
 ('ペンペンと買い物に行ったわ', 3),
@@ -81,22 +81,22 @@ UPDATE people SET department_id = 5 WHERE name = '渚かおる';
 
 -- Q5
 
-SELECT name, age
-FROM people
-WHERE gender = 1
-ORDER BY age DESC;
+SELECT `name`, `age`
+FROM `people`
+WHERE `gender` = 1
+ORDER BY `age` DESC;
 
 
 -- Q6
 
 -- SELECT
---  name, email, age
+--`name`, `email`, `age`
 --FROM
---  people
+--`people`
 --WHERE
---  department_id = 1
+--`department_id` = 1
 --ORDER BY
---  created_at;
+--`created_at`;
 
 peopleテーブルから、name,emile,ageカラムを選択して、
 department_idから1のレコードだけが表示される様に指定して
@@ -105,39 +105,39 @@ created_atカラム（作成日時）で並べている。
 
 -- Q7
 
-SELECT name
-FROM people
-WHERE (gender = 1 AND age BETWEEN 40 AND 49)
-OR (gender = 2 AND age BETWEEN 20 AND 29);
+SELECT `name`
+FROM `people`
+WHERE (`gender` = 1 AND `age` BETWEEN 40 AND 49)
+OR (`gender` = 2 AND `age` BETWEEN 20 AND 29);
 
 
 -- Q8
 
 SELECT *
-FROM people
-WHERE department_id = 1
-ORDER BY age ASC;
+FROM `people`
+WHERE `department_id` = 1
+ORDER BY `age` ASC;
 
 
 --Q9
 
-SELECT AVG(age) AS average_age
-FROM people
-WHERE department_id = 2 AND gender = 2
+SELECT AVG(`age`) AS average_age
+FROM `people`
+WHERE `department_id` = 2 AND `gender` = 2
 ORDER BY average_age;
 
 
 -- Q10
 
-SELECT people.name, departments.name, reports.content
-FROM people
-INNER JOIN departments ON people.department_id = departments.department_id
-INNER JOIN reports ON people.person_id = reports.person_id;
+SELECT `people`.`name`, `departments`.`name`, `reports`.`content`
+FROM `people`
+INNER JOIN `departments` ON `people`.`department_id` = `departments`.`department_id`
+INNER JOIN `reports` ON `people`.`person_id` = `reports`.`person_id`;
 
 
 -- Q11
 
-SELECT people.name
-FROM people
-LEFT JOIN reports ON people.person_id = reports.person_id
-WHERE reports.person_id IS NULL;
+SELECT `people`.`name`
+FROM `people`
+LEFT JOIN `reports` ON `people`.`person_id` = `reports`.`person_id`
+WHERE `reports`.`person_id` IS NULL;
